@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { createTheme, ThemeProvider, alpha } from '@mui/material/styles';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { DIFF_PER_BOTTLE, LINE_OFFICIAL_ID, MAX_BOTTLES, TEXTS, BottleSize } from './constants';
+import { DIFF_PER_BOTTLE, LINE_ESTIMATE_URL, MAX_BOTTLES, TEXTS, BottleSize } from './constants';
 import { validateBottleCount, formatYen } from './utils/validation';
 
 // ============================================================
@@ -70,29 +70,18 @@ type InputState = {
 type SizeConfig = {
   size: BottleSize;
   label: string;
-  volume: string;
 };
 
 // ============================================================
 // 定数
 // ============================================================
 const SIZE_CONFIGS: SizeConfig[] = [
-  { size: '3L', label: '3L', volume: '3リットル' },
-  { size: '6L', label: '6L', volume: '6リットル' },
-  { size: '15L', label: '15L', volume: '15リットル' },
+  { size: '3L', label: '3L' },
+  { size: '6L', label: '6L' },
+  { size: '15L', label: '15L' },
 ];
 
 const INITIAL_INPUT: InputState = { raw: '', value: 0, error: null };
-
-// ============================================================
-// LINE deep link 生成（方式B）
-// ============================================================
-function buildLineUrl(bottles: Record<BottleSize, number>, total: number): string {
-  const message = TEXTS.LINE_MESSAGE_TEMPLATE(bottles, total);
-  const encodedId = encodeURIComponent(LINE_OFFICIAL_ID);
-  const encodedMsg = encodeURIComponent(message);
-  return `https://line.me/R/oaMessage/${encodedId}/?${encodedMsg}`;
-}
 
 // ============================================================
 // サブコンポーネント: サイズ入力カード
@@ -214,14 +203,6 @@ export default function App() {
   };
   const totalBenefit = subtotals['3L'] + subtotals['6L'] + subtotals['15L'];
 
-  const bottles: Record<BottleSize, number> = {
-    '3L': inputs['3L'].value,
-    '6L': inputs['6L'].value,
-    '15L': inputs['15L'].value,
-  };
-
-  const lineUrl = buildLineUrl(bottles, totalBenefit);
-
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -336,7 +317,7 @@ export default function App() {
             {/* ============ CTA ============ */}
             <Button
               component="a"
-              href={lineUrl}
+              href={LINE_ESTIMATE_URL}
               variant="contained"
               size="large"
               endIcon={<ArrowForwardIcon />}
