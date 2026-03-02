@@ -7,7 +7,7 @@ import {
   Container,
   Divider,
   Stack,
-  TextField,
+  TextField
   Typography,
   InputAdornment,
   Chip,
@@ -317,7 +317,7 @@ export default function App() {
             {/* ============ CTA ============ */}
             <Button
               component="a"
-              href={LINE_ESTIMATE_URL}
+              href={LINE_ESTIMATE_URL} target="_blank"
               variant="contained"
               size="large"
               endIcon={<ArrowForwardIcon />}
