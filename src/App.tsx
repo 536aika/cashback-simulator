@@ -314,7 +314,7 @@ export default function App() {
               </CardContent>
             </Card>
 
-            {/* ============ CTA ============ */}
+            <Box sx={{ position: 'sticky', bottom: 0, zIndex: 10, bgcolor: 'background.default', py: 1, mt: 2 }}>
             <Button
               component="a"
               href={LINE_ESTIMATE_URL} target="_blank"              onClick={(e) => { e.preventDefault(); const url = LINE_ESTIMATE_URL; if (window.top) { try { window.top.location.href = url; } catch(err) { window.open(url, '_blank'); } } else { window.open(url, '_blank'); } }}
@@ -332,6 +332,7 @@ export default function App() {
             >
               {TEXTS.CTA_BUTTON}
             </Button>
+                    </Box>
 
             {/* フッター注記 */}
             <Typography variant="caption" color="text.disabled" textAlign="center" display="block" sx={{ pb: 1 }}>
