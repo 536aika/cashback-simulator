@@ -317,7 +317,7 @@ export default function App() {
             {/* ============ CTA ============ */}
             <Button
               component="a"
-              href={LINE_ESTIMATE_URL} target="_blank"
+              href={LINE_ESTIMATE_URL} target="_blank"              onClick={(e) => { e.preventDefault(); const url = LINE_ESTIMATE_URL; if (window.top) { try { window.top.location.href = url; } catch(err) { window.open(url, '_blank'); } } else { window.open(url, '_blank'); } }}
               variant="contained"
               size="large"
               endIcon={<ArrowForwardIcon />}
